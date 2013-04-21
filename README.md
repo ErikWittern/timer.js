@@ -10,23 +10,32 @@ Timer.js requires underscore.js and jquery.js.
 # Usage
 
 ## Initialize timer
-Provide the HTML element in which you want to display the stopwatch in format 'mm:ss':
-
+Initialize a new timer in the following way:
 ```javascript
-var timer = new Timer('#output');
+var timer = new Timer();
 ```
+
+If desired, provide an HTML element where to display the stopwatch in format 'mm:ss':
 
 ```html
 <p id="output"></p>
 ```
 
+```javascript
+var timer = new Timer('#output');
+```
+
 ## Add events
-Each event is provided with an id and with the time of occurrence in seconds. Events can also be removed.
+Each event is provided with an id and with the time of occurrence in seconds.
 
 ```javascript
 timer.addEvent("event_a", 1);
 timer.addEvent("event_b", 4);
 timer.addEvent("event_c", 5);
+```
+Events can also be removed.
+
+```javascript
 timer.removeEvent("event_b");
 ```
 
@@ -35,7 +44,7 @@ Subscribe to "timedEvent" to set up handler for any event. The callback will get
 
 ```javascript
 var subscription = timer.subscribe('timedEvent', function(e, identifier){
-	console.log(identifier); // will output "event_a" after one second and "event_c" after 5 seconds
+	console.log(identifier); // will output "event_a" after 1 second and "event_c" after 5 seconds
 });
 ```
 
@@ -47,7 +56,7 @@ var subscriptionIndividual = timer.subscribe('event_a', function(e){
 });
 ```
 
-You can later also unsubscribe, if desired:
+You can also unsubscribe from events:
 
 ```javascript
 timer.unsubscribe(subscription);
@@ -71,11 +80,10 @@ Set up the html:
 <button id="reset-btn">Reset</button>
 ```
 
-Use jQuery to make use of the controls:
+Use jQuery to allow users to start/stop the timer:
 ```javascript
 $('#start-stop-btn').click(function(){
-	var running = timer.isRunning();
-	if(running){
+	if(timer.isRunning()){
 		timer.stop();
 		$('#start-stop-btn').html("Resume");
 	} else {
@@ -83,7 +91,11 @@ $('#start-stop-btn').click(function(){
 		$('#start-stop-btn').html("Pause");
 	};
 });
+```
 
+Allow users to reset the timer:
+
+```javascript
 $('#reset-btn').click(function(){
 	timer.reset();
 });
