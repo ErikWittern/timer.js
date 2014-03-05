@@ -1,4 +1,4 @@
-// 
+//
 // Timer.js
 // https://github.com/ewittern/timerjs
 //
@@ -64,7 +64,7 @@
 
 	//
 	//	Controlling the time measuring:
-	// 
+	//
 	Timer.prototype.start = function(){
 		running = true;
 	};
@@ -95,7 +95,7 @@
 	};
 
 	Timer.prototype.removeEvent = function (identifier) {
-		eventList = _(eventList).reject(function(el) { 
+		eventList = _(eventList).reject(function(el) {
 			return el.identifier === identifier;
 		});
 	};
